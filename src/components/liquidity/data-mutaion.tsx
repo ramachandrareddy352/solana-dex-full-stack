@@ -8,15 +8,12 @@ import { useMemo } from "react";
 import toast from "react-hot-toast";
 import { useCluster } from "../cluster/cluster-data-access";
 import { useAnchorProvider } from "../solana/solana-provider";
-import { useTransactionToast } from "../ui/ui-layout";
 import BN from "bn.js";
 import { getAssociatedTokenAddress } from "@solana/spl-token";
 import { message } from "antd";
 
 export function useDexProgram() {
-  const { connection } = useConnection();
   const { cluster } = useCluster();
-  const transactionToast = useTransactionToast();
   const provider = useAnchorProvider();
   const programId = useMemo(
     () => getDexProgramId(cluster.network as Cluster),
