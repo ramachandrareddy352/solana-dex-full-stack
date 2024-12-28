@@ -38,7 +38,12 @@ export function RemoveLiquidity() {
   const [userTwoBalance, setUserTwoBalance] = useState(0);
 
   const withdrawLiquidity = async () => {
-    if (liquidityAmount != 0 && tokenOne?.tokenMint && tokenTwo?.tokenMint) {
+    if (
+      liquidityAmount != 0 &&
+      tokenOne?.tokenMint &&
+      tokenTwo?.tokenMint &&
+      publicKey
+    ) {
       await removeLiquidityMutation
         .mutateAsync({
           mintA: tokenOne?.tokenMint,
@@ -50,6 +55,7 @@ export function RemoveLiquidity() {
           console.log("Liquidity Withdraw successfully!");
           console.log("Response data:", data); // Log the returned data
         });
+
       const ATAOne = await getAssociatedTokenAddress(
         new PublicKey(tokenOne.tokenMint),
         program.provider.publicKey || new PublicKey("")

@@ -244,7 +244,7 @@ export function useDexProgram() {
               new BN(fees)
             )
             .accounts({
-              amm: { pubkey: ammAccount, isSigner: false, isWritable: false },
+              amm: ammAccount,
               pool: poolAccount,
               depositor: program.provider.publicKey,
               mintLiquidity: mintLiquidity,
