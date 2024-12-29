@@ -126,6 +126,9 @@ export default function Swaps() {
     const oneAmount = tokenOneAmount;
     setTokenOneAmount(tokenTwoAmount);
     setTokenTwoAmount(oneAmount);
+    const oneBalance = userOneBalance;
+    setUserOneBalance(userTwoBalance);
+    setUserTwoBalance(oneBalance);
   }
 
   const swapTokens = async () => {
@@ -640,7 +643,8 @@ export default function Swaps() {
           </div>
 
           <div>
-            {swapExactInputMutation.isPending ? (
+            {swapExactInputMutation.isPending ||
+            swapExactOutputMutation.isPending ? (
               <div className="my-5" style={{ marginLeft: "45%" }}>
                 <span className="loading loading-spinner loading-lg"></span>
               </div>

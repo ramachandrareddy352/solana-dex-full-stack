@@ -2,6 +2,107 @@
 
 ### Installation
 
+#### Structure
+```shell
+Directory structure:
+└── ramachandrareddy352-solana-dex-full-stack/
+    ├── .github/
+    │   └── workflows/
+    │       ├── test-web.yml
+    │       └── test-anchor.yml
+    ├── next.config.mjs
+    ├── .eslintrc.json
+    ├── public/
+    │   └── token.webp
+    ├── package.json
+    ├── postcss.config.mjs
+    ├── tailwind.config.ts
+    ├── LICENSE
+    ├── tsconfig.json
+    ├── README.md
+    ├── pnpm-lock.yaml
+    ├── anchor/
+    │   ├── .prettierignore
+    │   ├── tests/
+    │   │   └── counter.spec.ts
+    │   ├── Cargo.toml
+    │   ├── .gitignore
+    │   ├── migrations/
+    │   │   └── deploy.ts
+    │   ├── Anchor.toml
+    │   ├── programs/
+    │   │   └── rcr_dex/
+    │   │       ├── Xargo.toml
+    │   │       ├── Cargo.toml
+    │   │       └── src/
+    │   │           ├── state.rs
+    │   │           ├── errors.rs
+    │   │           ├── lib.rs
+    │   │           ├── constants.rs
+    │   │           ├── utils.rs
+    │   │           └── instructions/
+    │   │               ├── swap_exact_input.rs
+    │   │               ├── create_amm.rs
+    │   │               ├── create_pool.rs
+    │   │               ├── withdraw_liquidity.rs
+    │   │               ├── change_amm_admin.rs
+    │   │               ├── deposit_liquidity.rs
+    │   │               ├── mod.rs
+    │   │               └── swap_exact_output.rs
+    │   ├── tsconfig.json
+    │   ├── target/
+    │   │   ├── idl/
+    │   │   │   └── rcr_dex.json
+    │   │   └── types/
+    │   │       └── rcr_dex.ts
+    │   ├── Cargo.lock
+    │   └── src/
+    │       ├── dex-exports.ts
+    │       └── index.ts
+    └── src/
+        ├── components/
+        │   ├── swap/
+        │   │   ├── swap-mutation.tsx
+        │   │   └── swap-ui.tsx
+        │   ├── solana/
+        │   │   └── solana-provider.tsx
+        │   ├── ui/
+        │   │   └── ui-layout.tsx
+        │   ├── pools/
+        │   │   ├── pool-ui.tsx
+        │   │   ├── create-pools.tsx
+        │   │   ├── pool-mutation.tsx
+        │   │   └── view-pools.tsx
+        │   ├── cluster/
+        │   │   ├── cluster-data-access.tsx
+        │   │   └── cluster-ui.tsx
+        │   ├── liquidity/
+        │   │   ├── liquidity-ui.tsx
+        │   │   ├── data-mutaion.tsx
+        │   │   ├── remove-liquidity.tsx
+        │   │   └── add-liquidity.tsx
+        │   ├── data-access/
+        │   │   ├── account-ui.tsx
+        │   │   └── account-data-access.tsx
+        │   └── home/
+        │       ├── home-page-ui.tsx
+        │       └── home-css.css
+        └── app/
+            ├── api/
+            │   └── hello/
+            │       └── route.ts
+            ├── page.tsx
+            ├── globals.css
+            ├── swap/
+            │   └── page.tsx
+            ├── pools/
+            │   └── page.tsx
+            ├── liquidity/
+            │   └── page.tsx
+            ├── layout.tsx
+            └── react-query-provider.tsx
+```
+
 #### Website
 
 ```shell
