@@ -514,7 +514,7 @@ export default function Swaps() {
             <div className="flex items-center  justify-between">
               <div>
                 <input
-                  className=" w-full outline-none h-8 px-2 appearance-none text-3xl bg-transparent"
+                  className=" w-full outline-none h-8 appearance-none text-3xl bg-transparent"
                   type="number"
                   onChange={handleInputAmount}
                   value={tokenOneAmount}
