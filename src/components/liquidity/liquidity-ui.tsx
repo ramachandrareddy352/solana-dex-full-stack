@@ -31,6 +31,7 @@ export default function Liquidity() {
                   ? "bg-indigo-100 text-indigo-700"
                   : "text-gray-500 hover:text-gray-700"
               }`}
+              style={{ border: "white solid 1px" }}
             >
               Add Liquidity &nbsp;&nbsp; <RiseOutlined />
             </button>
@@ -41,6 +42,7 @@ export default function Liquidity() {
                   ? "bg-indigo-100 text-indigo-700"
                   : "text-gray-500 hover:text-gray-700"
               }`}
+              style={{ border: "white solid 1px" }}
             >
               Remove Liquidity &nbsp;&nbsp; <FallOutlined />
             </button>

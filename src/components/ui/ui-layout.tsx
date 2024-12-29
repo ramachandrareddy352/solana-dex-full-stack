@@ -31,8 +31,8 @@ export function UiLayout({
   const pathname = usePathname();
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="navbar bg-base-300 text-neutral-content flex-col md:flex-row space-y-2 md:space-y-0 fixed  bg-dark text-white">
+    <div className="h-full flex flex-col bg-black">
+      <div className="navbar bg-base-300 text-neutral-content flex-col md:flex-row space-y-2 md:space-y-0 fixed  bg-black text-white">
         <div className="flex-1">
           <Link
             className="btn btn-ghost normal-case text-xl mx-5"
@@ -63,7 +63,7 @@ export function UiLayout({
         <AccountChecker />
       </ClusterChecker>
       <div
-        className="flex-grow mx-4 lg:mx-auto text-white"
+        className="flex-grow mx-4 lg:mx-auto bg-black text-white"
         style={{ marginTop: "70px" }}
       >
         <Suspense
@@ -77,7 +77,7 @@ export function UiLayout({
         </Suspense>
         <Toaster position="bottom-right" />
       </div>
-      <footer className="footer footer-center p-4 bg-base-300 text-base-content mt-3 bg-dark text-white">
+      <footer className="footer footer-center p-4 bg-base-300 text-base-content bg-black text-white">
         <aside className="flex justify-around" style={{ width: "50%" }}>
           <p>
             <a

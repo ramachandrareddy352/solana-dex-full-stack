@@ -107,7 +107,7 @@ export function ViewPools() {
 
   return (
     <div
-      className=" py-3 text-white"
+      className=" py-3 text-white bg-black"
       style={{ alignItems: "center", justifyItems: "center" }}
     >
       <div
@@ -115,6 +115,8 @@ export function ViewPools() {
         style={{
           width: "900px",
           borderRadius: "20px",
+          height: "500px",
+          overflow: "scroll",
         }}
       >
         <div className="flex items-center gap-3 mb-6">
