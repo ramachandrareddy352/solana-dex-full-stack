@@ -57,7 +57,7 @@ export function CreatePools() {
           <h1 className="text-2xl font-bold">Create Liquidity Pool</h1>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form className="space-y-6">
           <div className="space-y-4">
             <div>
               <label
@@ -147,6 +147,7 @@ export function CreatePools() {
                 color: "black",
                 fontSize: "20px",
               }}
+              onClick={handleSubmit}
             >
               Create Pool
             </button>
