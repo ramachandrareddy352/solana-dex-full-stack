@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useDexProgram } from "./pool-mutation";
 import { message } from "antd";
+import { InfoCircleOutlined } from "@ant-design/icons";
 
 export function CreatePools() {
   const [formData, setFormData] = useState({
@@ -127,6 +128,10 @@ export function CreatePools() {
               ))}
             </div>
           </fieldset>
+          <div className="mx-4">
+            <InfoCircleOutlined /> No two tokens can create multiple pools even
+            having multiple fees.
+          </div>
 
           {createPoolMutation.isPending ? (
             <div style={{ marginLeft: "45%" }}>
@@ -134,8 +139,14 @@ export function CreatePools() {
             </div>
           ) : (
             <button
-              type="submit"
-              className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200 transition-colors font-medium"
+              type="button"
+              className="flex btn btn-outline-primary my-5"
+              style={{
+                width: "100%",
+                backgroundColor: "white",
+                color: "black",
+                fontSize: "20px",
+              }}
             >
               Create Pool
             </button>

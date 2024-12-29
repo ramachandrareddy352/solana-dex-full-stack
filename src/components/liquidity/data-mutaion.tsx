@@ -119,6 +119,7 @@ export function useDexProgram() {
               true
             )
             .accounts({
+              // @ts-ignore
               amm: ammAccount,
               pool: poolAccount,
               depositor: program.provider.publicKey,
@@ -244,6 +245,7 @@ export function useDexProgram() {
               new BN(fees)
             )
             .accounts({
+              // @ts-ignore
               amm: ammAccount,
               pool: poolAccount,
               depositor: program.provider.publicKey,

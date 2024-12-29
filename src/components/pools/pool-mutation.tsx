@@ -101,6 +101,7 @@ export function useDexProgram() {
       return await program.methods
         .createPool(new BN(fees))
         .accounts({
+          // @ts-ignore
           amm: ammAccount,
           pool: poolAccount,
           mintLiquidity: mintLiquidity,

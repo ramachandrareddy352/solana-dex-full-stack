@@ -82,6 +82,7 @@ export function UiLayout({
               href="https://github.com/ramachandrareddy352/"
               target="_blank"
               rel="noopener noreferrer"
+              style={{ textDecoration: "none" }}
             >
               <GithubOutlined />
               <b>&nbsp;Github</b>
@@ -93,6 +94,7 @@ export function UiLayout({
               href="mailto:rcrtavanam@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
+              style={{ textDecoration: "none" }}
             >
               <MailOutlined />
               <b>&nbsp;E-Mail</b>
@@ -104,6 +106,7 @@ export function UiLayout({
               href="https://www.linkedin.com/in/ramachandratavanam/"
               target="_blank"
               rel="noopener noreferrer"
+              style={{ textDecoration: "none" }}
             >
               <LinkedinOutlined />
               <b>&nbsp;LinkedIn</b>
@@ -115,6 +118,7 @@ export function UiLayout({
               href="https://x.com/TavanamRama"
               target="_blank"
               rel="noopener noreferrer"
+              style={{ textDecoration: "none" }}
             >
               <TwitterOutlined />
               <b>&nbsp;Twitter</b>
@@ -126,6 +130,7 @@ export function UiLayout({
               href="https://ramachandrareddy.netlify.app/"
               target="_blank"
               rel="noopener noreferrer"
+              style={{ textDecoration: "none" }}
             >
               <GlobalOutlined />
               <b>&nbsp;Portfolio</b>
