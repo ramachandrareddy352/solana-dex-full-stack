@@ -16,7 +16,7 @@ export default function Pools() {
   const [activeTab, setActiveTab] = useState<"add" | "remove">("add");
 
   return publicKey ? (
-    <div className=" from-blue-50 to-indigo-50 flex items-center justify-center p-4">
+    <div className=" from-blue-50 to-indigo-50 flex items-center justify-center p-4 text-white">
       <div className="w-full" style={{ width: "600px" }}>
         <div className="bg-black rounded-xl shadow-lg p-1">
           <div className="grid grid-cols-2 gap-1">

@@ -32,7 +32,7 @@ export function UiLayout({
 
   return (
     <div className="h-full flex flex-col">
-      <div className="navbar bg-base-300 text-neutral-content flex-col md:flex-row space-y-2 md:space-y-0 fixed">
+      <div className="navbar bg-base-300 text-neutral-content flex-col md:flex-row space-y-2 md:space-y-0 fixed  bg-dark text-white">
         <div className="flex-1">
           <Link
             className="btn btn-ghost normal-case text-xl mx-5"
@@ -62,7 +62,10 @@ export function UiLayout({
       <ClusterChecker>
         <AccountChecker />
       </ClusterChecker>
-      <div className="flex-grow mx-4 lg:mx-auto" style={{ marginTop: "70px" }}>
+      <div
+        className="flex-grow mx-4 lg:mx-auto text-white"
+        style={{ marginTop: "70px" }}
+      >
         <Suspense
           fallback={
             <div className="text-center my-32">
@@ -74,7 +77,7 @@ export function UiLayout({
         </Suspense>
         <Toaster position="bottom-right" />
       </div>
-      <footer className="footer footer-center p-4 bg-base-300 text-base-content mt-3">
+      <footer className="footer footer-center p-4 bg-base-300 text-base-content mt-3 bg-dark text-white">
         <aside className="flex justify-around" style={{ width: "50%" }}>
           <p>
             <a

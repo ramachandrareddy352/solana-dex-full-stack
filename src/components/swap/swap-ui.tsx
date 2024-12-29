@@ -448,7 +448,7 @@ export default function Swaps() {
 
   return publicKey ? (
     <div
-      className="bg-zinc-900 w-[35%] p-4 px-6 rounded-xl mt-5"
+      className="bg-zinc-900 w-[35%] p-4 px-6 rounded-xl mt-5 text-white"
       style={{ width: "600px" }}
     >
       <Modal

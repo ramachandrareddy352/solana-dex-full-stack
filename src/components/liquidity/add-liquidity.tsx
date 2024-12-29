@@ -215,7 +215,7 @@ export function AddLiquidity() {
 
   return (
     <div
-      className="bg-zinc-900 w-[35%] p-4 px-6 rounded-xl my-2"
+      className="bg-zinc-900 w-[35%] p-4 px-6 rounded-xl my-2 text-white"
       style={{ width: "600px" }}
     >
       <Modal
