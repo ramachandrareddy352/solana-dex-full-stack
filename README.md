@@ -30,7 +30,7 @@ Directory structure:
     ├── anchor/
     │   ├── .prettierignore
     │   ├── tests/
-    │   │   └── counter.spec.ts
+    │   │   └── rcr_dex_test.spec.ts
     │   ├── Cargo.toml
     │   ├── .gitignore
     │   ├── migrations/
