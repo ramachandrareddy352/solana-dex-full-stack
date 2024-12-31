@@ -9,6 +9,7 @@ import { Modal, message, Image } from "antd";
 import { PublicKey } from "@solana/web3.js";
 import { getAssociatedTokenAddress } from "@solana/spl-token";
 import { DownOutlined, InfoCircleOutlined } from "@ant-design/icons";
+import { encodeURL, createQR, findReference } from "@solana/pay";
 
 type TokenData = {
   tokenMint: string;
