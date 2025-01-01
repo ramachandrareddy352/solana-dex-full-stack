@@ -5,7 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { createQR } from "@solana/pay";
 
-const SOLANA_PAY_URL = "solana:http://localhost:3000/api/hello";
+const SOLANA_PAY_URL = "solana:https://rcrdex.netlify.app/api/hello";
 
 export default function Page() {
   const qrRef = useRef<HTMLDivElement | null>(null);
