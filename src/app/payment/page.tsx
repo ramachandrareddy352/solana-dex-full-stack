@@ -27,7 +27,7 @@ export default function Page() {
           <h1 className="text-center text-5xl md:pl-12 font-bold text-transparent bg-clip-text bg-gradient-to-br from-indigo-500 to-fuchsia-500 mb-4">
             Scan this:
           </h1>
-          <div ref={qrRef} />
+          <div ref={qrRef || null} />
         </div>
       </div>
     </div>
