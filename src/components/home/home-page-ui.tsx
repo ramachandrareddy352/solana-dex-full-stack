@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <div>
       <div className="container relative mx-auto h-[calc(100dvh-120px)] overflow-hidden">
-        <div className="space-y- px-5 sm:px-10 sm:py-3 fixed h-[calc(100vh-110px)] sm:h-[calc(100%-150px)]  w-[90%] overflow-y-scroll scrollbar-hide top-[48%] left-1/2 transform -translate-x-1/2 -translate-y-[48%] bg-[#202020] rounded-[10px]">
+        <div className="space-y- px-5 sm:px-10 sm:py-3 fixed h-[calc(100vh-130px)] sm:h-[calc(100%-150px)]  w-[90%] overflow-y-scroll scrollbar-hide top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-[48%] bg-[#202020] rounded-[10px]">
           <div className="header text-justify" id="myHeader">
             <p className="text-red-600 leading-4 md:leading-5 mx-1 mt-4 mb-2 text-[70%] md:text-[100%]">
               NOTE: Please read the instructions given below, which helps to
