@@ -450,7 +450,7 @@ export default function Swaps() {
   }, [tokenOne, tokenTwo]);
 
   return publicKey ? (
-    <div className=" from-blue-50 to-indigo-50 flex items-center justify-center p-4 text-white w-[100%] md:w-[750px] mx-auto">
+    <div className="  from-blue-50 to-indigo-50 flex items-center justify-center p-4 lg:pb-0 text-white w-[100%] md:w-[800px] mx-auto h-calc(100vh-135px) relative mb-[15px] lg:mb-0">
       <div className="w-full">
         <div
         className="bg-zinc-900 p-2 px-1 sm:p-4 sm:px-6 rounded-xl my-2 text-white mx-auto relative">
