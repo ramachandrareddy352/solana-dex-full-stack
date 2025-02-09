@@ -63,13 +63,13 @@ export function ClusterChecker({ children }: { children: ReactNode }) {
 export function ClusterUiSelect() {
   const { clusters, setCluster, cluster } = useCluster();
   return (
-    <div className="dropdown dropdown-end mx-3 relative">
-      <label tabIndex={0} className="btn btn-primary rounded-btn">
+    <div className="dropdown dropdown-end lg:mx-3 relative min-w-[80px] mx-auto">
+      <label tabIndex={0} className="btn btn-primary rounded-btn mx-auto">
         {cluster.name}
       </label>
       <ul
         tabIndex={0}
-        className="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4 left-0 transform translate-x-[-30%] lg:left-auto lg:translate-x-0"
+        className="menu dropdown-content z-[1] p-2 bg-[#2c2d30] shadow text-white rounded-box w-52 mt-4 left-0 transform translate-x-[-30%] lg:left-auto lg:translate-x-0"
       >
         {clusters.map((item) => (
           <li key={item.name}>
