@@ -164,7 +164,7 @@ export function UiLayout({
       </nav>     
       
       <div
-        className="bg-black text-white relative overflow-y-scroll scrollbar-hide relative w-[100%] min-h-[calc(100vh-137px)]"
+        className="bg-black text-white overflow-y-scroll scrollbar-hide relative w-[100%] min-h-[calc(100vh-137px)]"
       >
         <ClusterChecker>
         <AccountChecker />
@@ -180,7 +180,7 @@ export function UiLayout({
         </Suspense>
         <Toaster position="bottom-right" />
       </div>
-      <footer className="footer footer-center p-4 bg-base-300 text-base-content bg-black text-white inset-x-0 bottom-0 w-full fixed md:relative">
+      <footer className="footer footer-center p-4 bg-base-300 text-base-content bg-black text-white inset-x-0 bottom-0 w-full relative">
         <aside className="flex justify-around" style={{ width: "50%" }}>
           <p>
             <a
