@@ -86,7 +86,7 @@ export function AddLiquidity() {
 
       const apiUrl = `${location.protocol}//${
         location.host
-      }/api/depositLiquidity?${params.toString()}`;
+      }/api/hello?${params.toString()}`;
 
       const urlFields: TransactionRequestURLFields = {
         link: new URL(apiUrl),
