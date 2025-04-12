@@ -9,6 +9,7 @@
     "anchor-test": "cd anchor && anchor test",
     "dev": "next dev",
     "build": "next build",
+    "preinstall": "pnpm install --no-frozen-lockfile",
     "start": "next start",
     "lint": "next lint"
   },
