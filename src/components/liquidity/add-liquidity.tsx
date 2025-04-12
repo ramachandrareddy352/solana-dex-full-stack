@@ -57,15 +57,15 @@ export function AddLiquidity() {
       message.error("Connect your wallet first");
       return;
     }
-    // if (
-    //   !tokenOne ||
-    //   !tokenTwo ||
-    //   tokenOneAmount === 0 ||
-    //   tokenTwoAmount === 0
-    // ) {
-    //   message.error("Please select both tokens and enter their amounts");
-    //   return;
-    // }
+    if (
+      !tokenOne ||
+      !tokenTwo ||
+      tokenOneAmount === 0 ||
+      tokenTwoAmount === 0
+    ) {
+      message.error("Please select both tokens and enter their amounts");
+      return;
+    }
     console.log("stage-1");
     setShowQR(true);
     setPaymentStatus("Preparing transaction...");
@@ -74,30 +74,31 @@ export function AddLiquidity() {
       // Set minLiquidity (adjust this based on your logic; 0 is a placeholder)
       const minLiquidity = 0; // You may need to calculate this or allow user input
 
-      const params = new URLSearchParams();
-      params.append("reference", reference.toString());
-      params.append("account", publicKey.toString());
-      // params.append("mintA", tokenOne.tokenMint);
-      // params.append("mintB", tokenTwo.tokenMint);
-      // Update query parameter names to match route.ts expectations.
-      // params.append("depositAmountA", tokenOneAmount.toString());
-      // params.append("depositAmountB", tokenTwoAmount.toString());
-      params.append("minLiquidity", minLiquidity.toString());
-      // params.append("fees", fees.toString());
+      const params = new URLSearchParams([
+        ["reference", reference.toString()],
+        // ["account", publicKey.toString()],
+        ["mintA", tokenOne.tokenMint],
+        ["mintB", tokenTwo.tokenMint],
+        // Update query parameter names to match route.ts expectations.
+        ["depositAmountA", tokenOneAmount.toString()],
+        ["depositAmountB", tokenTwoAmount.toString()],
+        ["minLiquidity", minLiquidity.toString()],
+        ["fees", fees.toString()],
+      ]);
 
-      // const apiUrl = `${location.protocol}//${
-      //   location.host
-      // }/api/hello?${params.toString()}`;
-
-      const apiUrl = `${location.protocol}//${location.host}/api/hello/`;
+      const apiUrl = new URL(
+        `/api/hello?${params.toString()}`,
+        location.origin
+      );
+      // Encode the API URL into a QR code
+      const urlFields: TransactionRequestURLFields = {
+        link: apiUrl,
+      };
       console.log(apiUrl);
 
-      const urlFields: TransactionRequestURLFields = {
-        link: new URL(apiUrl),
-      };
       const url = encodeURL(urlFields);
-
       const qr = createQR(url, 400);
+
       if (qrRef.current) {
         qrRef.current.innerHTML = "";
         qr.append(qrRef.current);

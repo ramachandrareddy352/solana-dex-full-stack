@@ -69,11 +69,13 @@ pub fn deposit_liquidity(
     } else {
         let ratio_a = (minimal_amount_a
             .checked_mul(ctx.accounts.mint_liquidity.supply)
-            .unwrap()).checked_div(pool_a.amount)
+            .unwrap())
+        .checked_div(pool_a.amount)
         .unwrap();
         let ratio_b = (minimal_amount_b
             .checked_mul(ctx.accounts.mint_liquidity.supply)
-            .unwrap()).checked_div(pool_b.amount)
+            .unwrap())
+        .checked_div(pool_b.amount)
         .unwrap();
         if ratio_a > ratio_b {
             ratio_b
