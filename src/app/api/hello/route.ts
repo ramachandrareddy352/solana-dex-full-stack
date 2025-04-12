@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
       PROGRAM_ID
     );
     const [pool] = PublicKey.findProgramAddressSync(
-      [Buffer.from("pool"), amm.toBuffer(), mintA.toBuffer(), mintBPubkey.toBuffer()],
+      [Buffer.from("pool"), amm.toBuffer(), mintA.toBuffer(), mintB.toBuffer()],
       PROGRAM_ID
     );
     const [mintLiquidity] = PublicKey.findProgramAddressSync(
