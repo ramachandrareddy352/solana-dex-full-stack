@@ -25,6 +25,18 @@ function get(
   });
 }
 
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<GetData|PostData>
+) {
+  if(req.method == "GET"){
+    return get(req, res);
+  } else if(req.method == "POST"){
+    return await post(req, res);
+  }
+}
+
+
 async function post(
   req: NextApiRequest,
   res: NextApiResponse<PostData>
