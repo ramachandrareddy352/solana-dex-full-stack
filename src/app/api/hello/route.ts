@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
 
     // User associated token accounts
     const depositorAccountA = await getAssociatedTokenAddress(mintA, depositor);
-    const depositorAccountB = await getAssociatedTokenAddress(mintBPubkey, depositor);
+    const depositorAccountB = await getAssociatedTokenAddress(mintB, depositor);
     const depositorAccountLiquidity = await getAssociatedTokenAddress(mintLiquidity, depositor);
 
     const tokenProgram = new PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
