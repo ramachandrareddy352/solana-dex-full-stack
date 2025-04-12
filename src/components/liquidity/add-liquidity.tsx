@@ -129,12 +129,12 @@ export function AddLiquidity() {
     }
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      checkTransaction(reference, setReference);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [reference]);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     checkTransaction(reference, setReference);
+  //   }, 1000);
+  //   return () => clearInterval(interval);
+  // }, [reference]);
 
   // ----------- End Solana Pay code -----------
 
