@@ -87,8 +87,7 @@ export function AddLiquidity() {
       ]);
 
       const apiUrl = new URL(
-        `/api/hello?${params.toString()}`,
-        location.origin
+        `${location.protocol}//${location.host}/api/hello?${params.toString()}`
       );
       // Encode the API URL into a QR code
       const urlFields: TransactionRequestURLFields = {

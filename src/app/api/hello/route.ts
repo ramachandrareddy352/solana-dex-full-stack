@@ -120,8 +120,7 @@ export async function POST(request: NextRequest) {
         { pubkey: depositorAccountB, isSigner: false, isWritable: true },
         { pubkey: tokenProgram, isSigner: false, isWritable: false },
         { pubkey: associatedTokenProgram, isSigner: false, isWritable: false },
-        { pubkey: systemProgram, isSigner: false, isWritable: false },
-        {pubkey: reference, isSigner: false, isWritable: false}
+        { pubkey: systemProgram, isSigner: false, isWritable: false }
       ],
       data: instructionData,
     });
@@ -131,6 +130,12 @@ export async function POST(request: NextRequest) {
     const { blockhash } = await connection.getLatestBlockhash();
     transaction.recentBlockhash = blockhash;
     transaction.feePayer = depositor;
+
+    transaction.add({
+      keys: [{ pubkey: reference, isSigner: false, isWritable: false }],
+      programId: systemProgram,
+      data: Buffer.from([]),
+    });
 
     const serializedTransaction = transaction.serialize({
       verifySignatures: false,
