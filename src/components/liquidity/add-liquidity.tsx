@@ -84,19 +84,19 @@ export function AddLiquidity() {
       params.append("minLiquidity", minLiquidity.toString());
       params.append("fees", fees.toString());
 
-      const apiUrl = `${location.protocol}//${
-        location.host
-      }/api/hello?${params.toString()}`;
+      const apiUrl = `solana:https://rcrdex.netlify.app/api/hello`;
+      // const apiUrl = `https://rcrdex.netlify.app/api/hello?${params.toString()}`;
 
       const urlFields: TransactionRequestURLFields = {
         link: new URL(apiUrl),
       };
       const url = encodeURL(urlFields);
 
-      const qr = createQR(url, 400);
+      const qr = createQR(url, 360, "while", "black");
       if (qrRef.current) {
         qrRef.current.innerHTML = "";
         qr.append(qrRef.current);
+        console.log("appended");
       }
       setPaymentStatus("Pending...");
     } catch (error: any) {
