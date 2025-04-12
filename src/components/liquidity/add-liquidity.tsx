@@ -89,7 +89,8 @@ export function AddLiquidity() {
       //   location.host
       // }/api/hello?${params.toString()}`;
 
-      const apiUrl = `solana:${location.protocol}//${location.host}/api/hello`;
+      const apiUrl = `${location.protocol}//${location.host}/api/hello/`;
+      console.log(apiUrl);
 
       const urlFields: TransactionRequestURLFields = {
         link: new URL(apiUrl),
