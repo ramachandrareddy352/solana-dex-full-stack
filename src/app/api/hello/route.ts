@@ -1,43 +1,36 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { Connection, Keypair, PublicKey, SystemProgram, Transaction, TransactionConfirmationStrategy } from '@solana/web3.js'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from "next/server";
 // import * as base58 from "base-58";
 
 type GetData = {
   label: string
   icon: string
 }
+type Data = {
+  label?: string;
+  icon?: string;
+  transaction?: string;
+  message?: string;
+};
 type PostData = {
   transaction: string,
   message?: string
 }
 
-function get(
-  req: NextApiRequest,
-  res: NextApiResponse<GetData>
-  ) {
-  const label = 'SolAndy Minter';
+export async function GET(
+  request: NextRequest,
+  response: NextResponse<Data>
+) {
+  console.log(new URL(request.url));
+  const label = "Solana Pay";
   const icon = 'https://avatars.githubusercontent.com/u/92437260?v=4';
 
-  res.status(200).send({
-      label,
-      icon,
-  });
+  return NextResponse.json({label,icon},{status:200});
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<GetData|PostData>
-) {
-  if(req.method == "GET"){
-    return get(req, res);
-  } else if(req.method == "POST"){
-    return await post(req, res);
-  }
-}
-
-
-async function post(
+export async function POST(
   req: NextApiRequest,
   res: NextApiResponse<PostData>
   ) {
