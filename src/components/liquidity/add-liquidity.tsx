@@ -17,6 +17,8 @@ import {
   TransactionRequestURLFields,
 } from "@solana/pay";
 
+import BigNumber from "bignumber.js";
+
 type TokenData = {
   tokenMint: string;
   poolBalance: number;
