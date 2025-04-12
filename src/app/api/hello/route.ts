@@ -45,7 +45,7 @@ export async function GET(
   console.log(new URL(request.url));
   console.log("reached to route")
   const label = "Solana Pay";
-  const icon = "https://prasadpadala.in/insta/insta2square.JPG";
+  const icon = "https://avatars.githubusercontent.com/u/119027299?v=4";
 
   return NextResponse.json({label,icon},{status:200});
 }
