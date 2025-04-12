@@ -79,15 +79,15 @@ export function AddLiquidity() {
       params.append("account", publicKey.toString());
       params.append("mintA", tokenOne.tokenMint);
       params.append("mintB", tokenTwo.tokenMint);
-      params.append("amountA", tokenOneAmount.toString());
-      params.append("amountB", tokenTwoAmount.toString());
+      // Update query parameter names to match route.ts expectations.
+      params.append("depositAmountA", tokenOneAmount.toString());
+      params.append("depositAmountB", tokenTwoAmount.toString());
       params.append("minLiquidity", minLiquidity.toString());
       params.append("fees", fees.toString());
 
-      const apiUrl = `${location.protocol}//${location.host}/api/hello`;
-      // const apiUrl = `${location.protocol}//${
-      //   location.host
-      // }/api/hello?${params.toString()}`;
+      const apiUrl = `${location.protocol}//${
+        location.host
+      }/api/hello?${params.toString()}`;
 
       const urlFields: TransactionRequestURLFields = {
         link: new URL(apiUrl),

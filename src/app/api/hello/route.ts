@@ -51,7 +51,16 @@ export async function POST(request: NextRequest) {
     const fees = searchParams.get("fees");
     const referenceParam = searchParams.get("reference");
 
-    if (!account || !mintA || !mintB || !depositAmountA || !depositAmountB || !minLiquidity || !fees || !referenceParam) {
+    if (
+      !account ||
+      !mintA ||
+      !mintB ||
+      !depositAmountA ||
+      !depositAmountB ||
+      !minLiquidity ||
+      !fees ||
+      !referenceParam
+    ) {
       throw new Error("Missing required fields in request parameters.");
     }
 
@@ -121,7 +130,7 @@ export async function POST(request: NextRequest) {
         { pubkey: tokenProgram, isSigner: false, isWritable: false },
         { pubkey: associatedTokenProgram, isSigner: false, isWritable: false },
         { pubkey: systemProgram, isSigner: false, isWritable: false },
-        {pubkey: reference, isSigner: false, isWritable: false}
+        { pubkey: reference, isSigner: false, isWritable: false }
       ],
       data: instructionData,
     });
