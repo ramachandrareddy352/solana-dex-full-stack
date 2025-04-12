@@ -78,17 +78,15 @@ export function AddLiquidity() {
       const params = new URLSearchParams();
       params.append("reference", reference.toString());
       // ["account", publicKey.toString()],
-      params.append("mintA", tokenOne.tokenMint);
-      params.append("mintB", tokenTwo.tokenMint);
-      // Update query parameter names to match route.ts expectations.
-      params.append("depositAmountA", tokenOneAmount.toString());
-      params.append("depositAmountB", tokenTwoAmount.toString());
-      params.append("minLiquidity", minLiquidity.toString());
-      params.append("fees", fees.toString());
+      // params.append("mintA", tokenOne.tokenMint);
+      // params.append("mintB", tokenTwo.tokenMint);
+      // // Update query parameter names to match route.ts expectations.
+      // params.append("depositAmountA", tokenOneAmount.toString());
+      // params.append("depositAmountB", tokenTwoAmount.toString());
+      // params.append("minLiquidity", minLiquidity.toString());
+      // params.append("fees", fees.toString());
 
-      const apiUrl = `${location.protocol}//${
-        location.host
-      }/api/hello?${params.toString()}`;
+      const apiUrl = `${location.protocol}//${location.host}/api/hello`;
       // Encode the API URL into a QR code
       const urlFields: TransactionRequestURLFields = {
         link: new URL(apiUrl),
