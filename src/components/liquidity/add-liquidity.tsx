@@ -88,7 +88,9 @@ export function AddLiquidity() {
       // params.append("minLiquidity", minLiquidity.toString());
       // params.append("fees", fees.toString());
 
-      const apiUrl = `${location.protocol}//${location.host}/api/hello`;
+      const apiUrl = `${location.protocol}//${
+        location.host
+      }/api/hello?${params.toString()}`;
       // Encode the API URL into a QR code
       const urlFields: TransactionRequestURLFields = {
         link: new URL(apiUrl),
