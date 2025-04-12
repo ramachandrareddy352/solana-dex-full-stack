@@ -95,23 +95,7 @@ export function AddLiquidity() {
       };
       console.log(apiUrl);
 
-      // const url = encodeURL(urlFields);
-      const recipient = new PublicKey(
-        "414C5ffjEmZaVdrptaA5TfWWNsLWFVM6aqZfPvwsxsmr"
-      );
-      const amount = new BigNumber(20);
-      const label = "hello";
-      const message = "testing the code";
-      const memo = "JC#4098";
-
-      const url = encodeURL({
-        recipient,
-        amount,
-        reference,
-        label,
-        message,
-        memo,
-      });
+      const url = encodeURL(urlFields);
       const qr = createQR(url, 360, "white", "black");
       console.log(url);
 
