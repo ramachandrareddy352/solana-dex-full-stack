@@ -12,6 +12,7 @@ import { getAssociatedTokenAddress } from "@solana/spl-token";
 
 const ENDPOINT = clusterApiUrl("devnet");
 const PROGRAM_ID = new PublicKey("DX4TnoHCQoCCLC5pg7K49CMb9maMA3TMfHXiPBD55G1w");
+const MEMO_PROGRAM_ID = new PublicKey("Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo");
 
 const getInstructionData = (
   depositAmountA: BN,
@@ -45,22 +46,13 @@ export async function POST(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const mintA = searchParams.get("mintA");
     const mintB = searchParams.get("mintB");
-    const depositAmountA = searchParams.get("depositAmountA");
-    const depositAmountB = searchParams.get("depositAmountB");
+    const amountA = searchParams.get("amountA");
+    const amountB = searchParams.get("amountB");
     const minLiquidity = searchParams.get("minLiquidity");
     const fees = searchParams.get("fees");
     const referenceParam = searchParams.get("reference");
 
-    if (
-      !account ||
-      !mintA ||
-      !mintB ||
-      !depositAmountA ||
-      !depositAmountB ||
-      !minLiquidity ||
-      !fees ||
-      !referenceParam
-    ) {
+    if (!account || !mintA || !mintB || !amountA || !amountB || !minLiquidity || !fees || !referenceParam) {
       throw new Error("Missing required fields in request parameters.");
     }
 
@@ -69,8 +61,8 @@ export async function POST(request: NextRequest) {
     const mintAPubkey = new PublicKey(mintA);
     const mintBPubkey = new PublicKey(mintB);
 
-    const depositAmountABN = new BN(depositAmountA);
-    const depositAmountBBN = new BN(depositAmountB);
+    const depositAmountABN = new BN(amountA);
+    const depositAmountBBN = new BN(amountB);
     const minLiquidityBN = new BN(minLiquidity);
     const feesBN = new BN(fees);
 
@@ -110,7 +102,7 @@ export async function POST(request: NextRequest) {
       depositAmountBBN,
       minLiquidityBN,
       feesBN,
-      false // useEntireAmount (hardcoded to false)
+      false
     );
 
     const depositIX = new TransactionInstruction({
@@ -130,13 +122,21 @@ export async function POST(request: NextRequest) {
         { pubkey: tokenProgram, isSigner: false, isWritable: false },
         { pubkey: associatedTokenProgram, isSigner: false, isWritable: false },
         { pubkey: systemProgram, isSigner: false, isWritable: false },
-        { pubkey: reference, isSigner: false, isWritable: false }
       ],
       data: instructionData,
     });
 
+    // Add memo instruction with reference account
+    const memoInstruction = new TransactionInstruction({
+      programId: MEMO_PROGRAM_ID,
+      keys: [
+        { pubkey: reference, isSigner: false, isWritable: true }
+      ],
+      data: Buffer.from("Deposit liquidity via Solana Pay", "utf-8"),
+    });
+
     const connection = new Connection(ENDPOINT);
-    const transaction = new Transaction().add(depositIX);
+    const transaction = new Transaction().add(depositIX).add(memoInstruction);
     const { blockhash } = await connection.getLatestBlockhash();
     transaction.recentBlockhash = blockhash;
     transaction.feePayer = sender;
