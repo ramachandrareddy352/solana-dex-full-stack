@@ -74,21 +74,19 @@ export function AddLiquidity() {
       // Set minLiquidity (adjust this based on your logic; 0 is a placeholder)
       const minLiquidity = 0; // You may need to calculate this or allow user input
 
-      const params = new URLSearchParams([
-        ["reference", reference.toString()],
-        // ["account", publicKey.toString()],
-        ["mintA", tokenOne.tokenMint],
-        ["mintB", tokenTwo.tokenMint],
-        // Update query parameter names to match route.ts expectations.
-        ["depositAmountA", tokenOneAmount.toString()],
-        ["depositAmountB", tokenTwoAmount.toString()],
-        ["minLiquidity", minLiquidity.toString()],
-        ["fees", fees.toString()],
-      ]);
+      const params = new URLSearchParams();
+      params.append("reference", reference.toString());
+      // ["account", publicKey.toString()],
+      params.append("mintA", tokenOne.tokenMint);
+      params.append("mintB", tokenTwo.tokenMint);
+      // Update query parameter names to match route.ts expectations.
+      params.append("depositAmountA", tokenOneAmount.toString());
+      params.append("depositAmountB", tokenTwoAmount.toString());
+      params.append("minLiquidity", minLiquidity.toString());
+      params.append("fees", fees.toString());
 
       const apiUrl = new URL(
-        `${location.protocol}//${location.host}/api/hello`
-        //         `${location.protocol}//${location.host}/api/hello?${params.toString()}`
+        `${location.protocol}//${location.host}/api/hello?${params.toString()}`
       );
       // Encode the API URL into a QR code
       const urlFields: TransactionRequestURLFields = {
