@@ -43,13 +43,21 @@ export async function POST(request: NextRequest) {
     const { account } = body;
 
     const { searchParams } = new URL(request.url);
-    const mintA = searchParams.get("mintA");
-    const mintB = searchParams.get("mintB");
-    const depositAmountA = searchParams.get("depositAmountA");
-    const depositAmountB = searchParams.get("depositAmountB");
-    const minLiquidity = searchParams.get("minLiquidity");
-    const fees = searchParams.get("fees");
-    const referenceParam = searchParams.get("reference");
+    // const mintA = searchParams.get("mintA");
+    // const mintB = searchParams.get("mintB");
+    // const depositAmountA = searchParams.get("depositAmountA");
+    // const depositAmountB = searchParams.get("depositAmountB");
+    // const minLiquidity = searchParams.get("minLiquidity");
+    // const fees = searchParams.get("fees");
+    // const referenceParam = searchParams.get("reference");
+
+    const mintA = "Gvi3gqecizXrhEKpaqKPMz4VduHyu6KULTURKNq577AE";
+    const mintB = "7UqEjPkUV3aL8aMJToVMGHXHXLAKotAgvTGQPJf72J3m";
+    const depositAmountA = 1000000;
+    const depositAmountB = 100000000;
+    const fees = 100;
+    const minLiquidity = 101;
+    const referenceParam = "7UqEjPkUV3aL8aMJToVMGHXHXLAKotAgvTGQPJf72J3n";
 
     if (
       !account ||
@@ -130,7 +138,7 @@ export async function POST(request: NextRequest) {
         { pubkey: tokenProgram, isSigner: false, isWritable: false },
         { pubkey: associatedTokenProgram, isSigner: false, isWritable: false },
         { pubkey: systemProgram, isSigner: false, isWritable: false },
-        { pubkey: reference, isSigner: false, isWritable: false }
+        // { pubkey: reference, isSigner: false, isWritable: false }
       ],
       data: instructionData,
     });
