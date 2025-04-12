@@ -84,8 +84,10 @@ export function AddLiquidity() {
       params.append("minLiquidity", minLiquidity.toString());
       params.append("fees", fees.toString());
 
-      const apiUrl = `solana:https://rcrdex.netlify.app/api/hello`;
-      // const apiUrl = `https://rcrdex.netlify.app/api/hello?${params.toString()}`;
+      const apiUrl = `${location.protocol}//${location.host}/api/hello`;
+      // const apiUrl = `${location.protocol}//${
+      //   location.host
+      // }/api/hello?${params.toString()}`;
 
       const urlFields: TransactionRequestURLFields = {
         link: new URL(apiUrl),
