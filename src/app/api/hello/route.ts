@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
     transaction.feePayer = sender;
 
     const serializedTransaction = transaction.serialize({
-      verifySignatures:false,
+      // verifySignatures:false,
       requireAllSignatures:false
     });
     const base64Transaction = serializedTransaction.toString("base64");
