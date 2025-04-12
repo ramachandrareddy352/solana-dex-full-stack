@@ -43,6 +43,7 @@ export async function GET(
   response: NextResponse<Data>
 ) {
   console.log(new URL(request.url));
+  console.log("reached to route")
   const label = "Solana Pay";
   const icon = "https://prasadpadala.in/insta/insta2square.JPG";
 

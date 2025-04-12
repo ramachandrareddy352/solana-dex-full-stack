@@ -49,7 +49,7 @@ export function AddLiquidity() {
   const qrRef = useRef<HTMLDivElement>(null);
   const [paymentStatus, setPaymentStatus] = useState("");
   const [showQR, setShowQR] = useState(false);
-  const [reference, setReference] = useState(Keypair.generate().publicKey);
+  // const [reference, setReference] = useState();
 
   const startPaymentTransfer = async () => {
     console.log("stage-1");
@@ -73,6 +73,7 @@ export function AddLiquidity() {
     try {
       // Set minLiquidity (adjust this based on your logic; 0 is a placeholder)
       const minLiquidity = 0; // You may need to calculate this or allow user input
+      const reference = new Keypair().publicKey;
 
       const params = new URLSearchParams();
       params.append("reference", reference.toString());
@@ -96,6 +97,7 @@ export function AddLiquidity() {
 
       const url = encodeURL(urlFields);
       const qr = createQR(url, 400);
+      console.log(url);
 
       if (qrRef.current) {
         qrRef.current.innerHTML = "";
@@ -110,24 +112,24 @@ export function AddLiquidity() {
     }
   };
 
-  const checkTransaction = async (
-    reference: PublicKey,
-    setReference: (newReference: PublicKey) => void
-  ) => {
-    try {
-      await findReference(connection, reference, { finality: "confirmed" });
-      setReference(Keypair.generate().publicKey);
-      setPaymentStatus("Confirmed");
-      window.alert("Deposit liquidity transaction confirmed!");
-      setShowQR(false);
-    } catch (e) {
-      if (e instanceof FindReferenceError) {
-        console.log(reference.toString(), "not confirmed yet");
-        return;
-      }
-      console.error("Unknown error checking transaction:", e);
-    }
-  };
+  // const checkTransaction = async (
+  //   reference: PublicKey,
+  //   setReference: (newReference: PublicKey) => void
+  // ) => {
+  //   try {
+  //     await findReference(connection, reference, { finality: "confirmed" });
+  //     setReference(Keypair.generate().publicKey);
+  //     setPaymentStatus("Confirmed");
+  //     window.alert("Deposit liquidity transaction confirmed!");
+  //     setShowQR(false);
+  //   } catch (e) {
+  //     if (e instanceof FindReferenceError) {
+  //       console.log(reference.toString(), "not confirmed yet");
+  //       return;
+  //     }
+  //     console.error("Unknown error checking transaction:", e);
+  //   }
+  // };
 
   // useEffect(() => {
   //   const interval = setInterval(() => {
