@@ -1,170 +1,161 @@
-import {
-  clusterApiUrl,
-  PublicKey,
-  Connection,
-  Transaction,
-  TransactionInstruction,
-} from "@solana/web3.js";
-import { NextRequest, NextResponse } from "next/server";
-import { sha256 } from "js-sha256";
-import BN from "bn.js";
-import { getAssociatedTokenAddress } from "@solana/spl-token";
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { Connection, Keypair, PublicKey, SystemProgram, Transaction, TransactionConfirmationStrategy } from '@solana/web3.js'
+import type { NextApiRequest, NextApiResponse } from 'next'
+// import * as base58 from "base-58";
 
-const ENDPOINT = clusterApiUrl("devnet");
-const PROGRAM_ID = new PublicKey("DX4TnoHCQoCCLC5pg7K49CMb9maMA3TMfHXiPBD55G1w");
-
-const getInstructionData = (
-  depositAmountA: BN,
-  depositAmountB: BN,
-  minLiquidity: BN,
-  fees: BN,
-  useEntireAmount: boolean
-): Buffer => {
-  const discriminator = sha256.digest("global:deposit_liquidity").slice(0, 8);
-  return Buffer.concat([
-    Buffer.from(discriminator),
-    depositAmountA.toArrayLike(Buffer, "le", 8),
-    depositAmountB.toArrayLike(Buffer, "le", 8),
-    minLiquidity.toArrayLike(Buffer, "le", 8),
-    fees.toArrayLike(Buffer, "le", 8),
-    Buffer.from([useEntireAmount ? 1 : 0]),
-  ]);
-};
-
-type Data = {
-  label?: string;
-  icon?: string;
-  transaction?: string;
-  message?: string;
-};
-
-export async function GET(
-  request: NextRequest,
-  response: NextResponse<Data>
-) {
-  console.log(new URL(request.url));
-  console.log("reached to route")
-  const label = "Solana Pay";
-  const icon = "https://avatars.githubusercontent.com/u/119027299?v=4";
-
-  return NextResponse.json({label,icon},{status:200});
+type GetData = {
+  label: string
+  icon: string
+}
+type PostData = {
+  transaction: string,
+  message?: string
 }
 
-export async function POST(request: NextRequest) {
-  // try {
-  //   const body = await request.json();
-  //   const { account } = body;
+function get(
+  req: NextApiRequest,
+  res: NextApiResponse<GetData>
+  ) {
+  const label = 'SolAndy Minter';
+  const icon = 'https://avatars.githubusercontent.com/u/92437260?v=4';
 
-  //   const { searchParams } = new URL(request.url);
-  //   const mintAPubkey = searchParams.get("mintA");
-  //   const mintBPubkey = searchParams.get("mintB");
-  //   const depositAmountA = searchParams.get("depositAmountA");
-  //   const depositAmountB = searchParams.get("depositAmountB");
-  //   const minLiquidity = searchParams.get("minLiquidity");
-  //   const fees = searchParams.get("fees");
-  //   const referenceParam = searchParams.get("reference");
+  res.status(200).send({
+      label,
+      icon,
+  });
+}
 
-  //   if (!account || !mintAPubkey || !mintBPubkey || !depositAmountA || !depositAmountB || !minLiquidity || !fees || !referenceParam) {
-  //     throw new Error("Missing required fields in request parameters.");
-  //   }
+async function post(
+  req: NextApiRequest,
+  res: NextApiResponse<PostData>
+  ) {
+    // Account provided in the transaction request body by the wallet.
+//     const accountField = req.body?.account;
+//     if (!accountField) throw new Error('missing account');
 
-  //   const reference = new PublicKey(referenceParam);
-  //   const depositor = new PublicKey(account);
-  //   const mintA = new PublicKey(mintAPubkey);
-  //   const mintB = new PublicKey(mintBPubkey);
+//     console.log("mint reqest by "+accountField);
 
-  //   const depositAmountABN = new BN(depositAmountA);
-  //   const depositAmountBBN = new BN(depositAmountB);
-  //   const minLiquidityBN = new BN(minLiquidity);
-  //   const feesBN = new BN(fees);
+//     const user = new PublicKey(accountField);
 
-  //   // Derive PDAs
-  //   const [amm] = PublicKey.findProgramAddressSync(
-  //     [Buffer.from("amm")],
-  //     PROGRAM_ID
-  //   );
-  //   const [pool] = PublicKey.findProgramAddressSync(
-  //     [Buffer.from("pool"), amm.toBuffer(), mintA.toBuffer(), mintB.toBuffer()],
-  //     PROGRAM_ID
-  //   );
-  //   const [mintLiquidity] = PublicKey.findProgramAddressSync(
-  //     [Buffer.from("liquidity"), pool.toBuffer()],
-  //     PROGRAM_ID
-  //   );
-  //   const [poolAccountA] = PublicKey.findProgramAddressSync(
-  //     [Buffer.from("pool-account-a"), pool.toBuffer(), mintA.toBuffer()],
-  //     PROGRAM_ID
-  //   );
-  //   const [poolAccountB] = PublicKey.findProgramAddressSync(
-  //     [Buffer.from("pool-account-b"), pool.toBuffer(), mintB.toBuffer()],
-  //     PROGRAM_ID
-  //   );
+//     const authority = Keypair.fromSecretKey(
+//       new Uint8Array(JSON.parse(process.env.AUTHORITY_KEY)),
+//     ); // tree and collection authority
+    
+//     const tree = new PublicKey("trePCqHys1cyPhnP7LqUWmHrBjrZmkHCcYfHQpMnAYX");
 
-  //   // User associated token accounts
-  //   const depositorAccountA = await getAssociatedTokenAddress(mintA, depositor);
-  //   const depositorAccountB = await getAssociatedTokenAddress(mintB, depositor);
-  //   const depositorAccountLiquidity = await getAssociatedTokenAddress(mintLiquidity, depositor);
+//     // Build Transaction
+//     const ix = await createMintCNFTInstruction(tree, user, authority.publicKey);
 
-  //   const tokenProgram = new PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
-  //   const associatedTokenProgram = new PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL");
-  //   const systemProgram = new PublicKey("11111111111111111111111111111111");
 
-  //   const instructionData = getInstructionData(
-  //     depositAmountABN,
-  //     depositAmountBBN,
-  //     minLiquidityBN,
-  //     feesBN,
-  //     false // useEntireAmount (hardcoded to false)
-  //   );
+//     let transaction = new Transaction();
+//     transaction.add(ix);
 
-  //   const depositIX = new TransactionInstruction({
-  //     programId: PROGRAM_ID,
-  //     keys: [
-  //       { pubkey: amm, isSigner: false, isWritable: false },
-  //       { pubkey: pool, isSigner: false, isWritable: true },
-  //       { pubkey: depositor, isSigner: true, isWritable: true },
-  //       { pubkey: mintLiquidity, isSigner: false, isWritable: true },
-  //       { pubkey: mintA, isSigner: false, isWritable: false },
-  //       { pubkey: mintB, isSigner: false, isWritable: false },
-  //       { pubkey: poolAccountA, isSigner: false, isWritable: true },
-  //       { pubkey: poolAccountB, isSigner: false, isWritable: true },
-  //       { pubkey: depositorAccountLiquidity, isSigner: false, isWritable: true },
-  //       { pubkey: depositorAccountA, isSigner: false, isWritable: true },
-  //       { pubkey: depositorAccountB, isSigner: false, isWritable: true },
-  //       { pubkey: tokenProgram, isSigner: false, isWritable: false },
-  //       { pubkey: associatedTokenProgram, isSigner: false, isWritable: false },
-  //       { pubkey: systemProgram, isSigner: false, isWritable: false }
-  //     ],
-  //     data: instructionData,
-  //   });
+//     const connection = new Connection(process.env.RPC_PROVIDER);
+//     const bh = await connection.getLatestBlockhash();
+//     transaction.recentBlockhash = bh.blockhash;
+//     transaction.feePayer = user; 
+    
+//     // for correct account ordering 
+//     transaction = Transaction.from(transaction.serialize({
+//       verifySignatures: false,
+//       requireAllSignatures: false,
+//     }));
 
-  //   const connection = new Connection(ENDPOINT);
-  //   const transaction = new Transaction().add(depositIX);
-  //   const { blockhash } = await connection.getLatestBlockhash();
-  //   transaction.recentBlockhash = blockhash;
-  //   transaction.feePayer = depositor;
+//     transaction.sign(authority);
+//     console.log(transaction)
 
-  //   transaction.add({
-  //     keys: [{ pubkey: reference, isSigner: false, isWritable: false }],
-  //     programId: systemProgram,
-  //     data: Buffer.from([]),
-  //   });
 
-  //   const serializedTransaction = transaction.serialize({
-  //     verifySignatures: false,
-  //     requireAllSignatures: false,
-  //   });
-  //   const base64Transaction = serializedTransaction.toString("base64");
+//     // Serialize and return the unsigned transaction.
+//     const serializedTransaction = transaction.serialize({
+//       verifySignatures: false,
+//       requireAllSignatures: false,
+//     });
 
-  //   return NextResponse.json(
-  //     {
-  //       transaction: base64Transaction,
-  //       message: "Deposit liquidity transaction created successfully.",
-  //     },
-  //     { status: 200 }
-  //   );
-  // } catch (error: any) {
-  //   console.error("Error creating transaction:", error);
-  //   return NextResponse.json({ error: error.message }, { status: 400 });
-  // }
+//     const base64Transaction = serializedTransaction.toString('base64');
+//     const message = 'Thank you for minting with SolAndy!';
+
+
+//     res.status(200).send({ transaction: base64Transaction, message });
+
+// }
+
+// export default async function handler(
+//   req: NextApiRequest,
+//   res: NextApiResponse<GetData|PostData>
+// ) {
+//   if(req.method == "GET"){
+//     return get(req, res);
+//   } else if(req.method == "POST"){
+//     return await post(req, res);
+//   }
+// }
+
+
+
+
+
+
+// async function createMintCNFTInstruction(merkleTree: PublicKey, account: PublicKey, authority: PublicKey) {
+
+//     const [treeAuthority, _bump] = PublicKey.findProgramAddressSync(
+//         [merkleTree.toBuffer()],
+//         BUBBLEGUM_PROGRAM_ID,
+//       );
+      
+//     const collectionMint = new PublicKey("CNFTva2m9bTSesbNLNTADCksoD8CN8bFd9vY68XQxZqQ")
+//     const [collectionMetadataAccount, _b1] = PublicKey.findProgramAddressSync(
+//         [
+//           Buffer.from("metadata", "utf8"),
+//           TOKEN_METADATA_PROGRAM_ID.toBuffer(),
+//           collectionMint.toBuffer(),
+//         ],
+//         TOKEN_METADATA_PROGRAM_ID
+//       );
+//       const [collectionEditionAccount, _b2] = PublicKey.findProgramAddressSync(
+//         [
+//           Buffer.from("metadata", "utf8"),
+//           TOKEN_METADATA_PROGRAM_ID.toBuffer(),
+//           collectionMint.toBuffer(),
+//           Buffer.from("edition", "utf8"),
+//         ],
+//         TOKEN_METADATA_PROGRAM_ID
+//       );
+//       const [bgumSigner, __] = PublicKey.findProgramAddressSync(
+//         [Buffer.from("collection_cpi", "utf8")],
+//         BUBBLEGUM_PROGRAM_ID
+//       );
+//     const ix = await createMintToCollectionV1Instruction({
+//         treeAuthority: treeAuthority,
+//         leafOwner: account,
+//         leafDelegate: account,
+//         merkleTree: merkleTree,
+//         payer: account,
+//         treeDelegate: authority,
+//         logWrapper: SPL_NOOP_PROGRAM_ID,
+//         compressionProgram: SPL_ACCOUNT_COMPRESSION_PROGRAM_ID,
+//         collectionAuthority: authority,
+//         collectionAuthorityRecordPda: BUBBLEGUM_PROGRAM_ID,
+//         collectionMint: collectionMint,
+//         collectionMetadata: collectionMetadataAccount,
+//         editionAccount: collectionEditionAccount,
+//         bubblegumSigner: bgumSigner,
+//         tokenMetadataProgram: TOKEN_METADATA_PROGRAM_ID,
+//     }, {
+//         metadataArgs: {
+//             collection: {key:collectionMint, verified: false},
+//             creators: [],
+//             isMutable: true,
+//             name: "First",
+//             primarySaleHappened: true,
+//             sellerFeeBasisPoints: 0,
+//             symbol: "cNFT",
+//             uri: "https://shdw-drive.genesysgo.net/3ETEvVmBCG25Wmxi3vEX6aWfieZGZGLn6h213rVynEnN/first.json",
+//             uses: null,
+//             tokenStandard: null,
+//             editionNonce: null,
+//             tokenProgramVersion: TokenProgramVersion.Original
+//         }
+//     });
+    
+//     return ix;
 }
