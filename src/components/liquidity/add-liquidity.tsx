@@ -16,7 +16,6 @@ import {
   FindReferenceError,
   TransactionRequestURLFields,
 } from "@solana/pay";
-
 import BigNumber from "bignumber.js";
 
 type TokenData = {
@@ -55,19 +54,19 @@ export function AddLiquidity() {
 
   const startPaymentTransfer = async () => {
     console.log("stage-1");
-    // if (!publicKey) {
-    //   message.error("Connect your wallet first");
-    //   return;
-    // }
-    // if (
-    //   !tokenOne ||
-    //   !tokenTwo ||
-    //   tokenOneAmount === 0 ||
-    //   tokenTwoAmount === 0
-    // ) {
-    //   message.error("Please select both tokens and enter their amounts");
-    //   return;
-    // }
+    if (!publicKey) {
+      message.error("Connect your wallet first");
+      return;
+    }
+    if (
+      !tokenOne ||
+      !tokenTwo ||
+      tokenOneAmount === 0 ||
+      tokenTwoAmount === 0
+    ) {
+      message.error("Please select both tokens and enter their amounts");
+      return;
+    }
     console.log("stage-1");
     setShowQR(true);
     setPaymentStatus("Preparing transaction...");
@@ -80,13 +79,13 @@ export function AddLiquidity() {
       const params = new URLSearchParams();
       params.append("reference", reference.toString());
       // ["account", publicKey.toString()],
-      // params.append("mintA", tokenOne.tokenMint);
-      // params.append("mintB", tokenTwo.tokenMint);
-      // // Update query parameter names to match route.ts expectations.
-      // params.append("depositAmountA", tokenOneAmount.toString());
-      // params.append("depositAmountB", tokenTwoAmount.toString());
-      // params.append("minLiquidity", minLiquidity.toString());
-      // params.append("fees", fees.toString());
+      params.append("mintA", tokenOne.tokenMint);
+      params.append("mintB", tokenTwo.tokenMint);
+      // Update query parameter names to match route.ts expectations.
+      params.append("depositAmountA", tokenOneAmount.toString());
+      params.append("depositAmountB", tokenTwoAmount.toString());
+      params.append("minLiquidity", minLiquidity.toString());
+      params.append("fees", fees.toString());
 
       const apiUrl = `${location.protocol}//${
         location.host
@@ -98,6 +97,22 @@ export function AddLiquidity() {
       console.log(apiUrl);
 
       const url = encodeURL(urlFields);
+      const recipient = new PublicKey(
+        "414C5ffjEmZaVdrptaA5TfWWNsLWFVM6aqZfPvwsxsmr"
+      );
+      const amount = new BigNumber(20);
+      const label = "hello";
+      const message = "testing the code";
+      const memo = "JC#4098";
+
+      // const url = encodeURL({
+      //   recipient,
+      //   amount,
+      //   reference,
+      //   label,
+      //   message,
+      //   memo,
+      // });
       const qr = createQR(url, 360, "white", "black");
       console.log(url);
 
