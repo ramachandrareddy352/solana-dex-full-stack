@@ -92,7 +92,7 @@ export function AddLiquidity() {
       };
       const url = encodeURL(urlFields);
 
-      const qr = createQR(url, 360, "while", "black");
+      const qr = createQR(url, 400);
       if (qrRef.current) {
         qrRef.current.innerHTML = "";
         qr.append(qrRef.current);
